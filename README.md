@@ -532,4 +532,4 @@ Use this for the assignment submission:
 - A GitHub token is optional, but recommended to reduce rate-limit issues.
 - If the frontend cannot reach the backend, check `NEXT_PUBLIC_API_BASE_URL` and `CORS_ORIGIN`.
 - If MySQL parsing issues appear, verify the schema is loaded and the backend env file is correct.
->>>>>>> 3452122 (polish README for submission)
+
