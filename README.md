@@ -1,227 +1,86 @@
-# GitAnalyzer
+# 🚀 GitAnalyzer
 
-GitAnalyzer is a production-oriented GitHub profile intelligence platform built with a Next.js frontend, an Express + MySQL backend, and the GitHub REST API. It analyzes public GitHub profiles, stores full snapshots in MySQL, and exposes a documented API for analysis, refresh, listing, detail views, and deletion.
+<div align="center">
 
-## Live Demo
+### GitHub Profile Intelligence Platform
 
-> No public deployment is currently configured in this repository.
+Analyze GitHub profiles, generate developer intelligence reports, track repository insights, evaluate coding activity, and store analysis snapshots with a production-ready full-stack architecture.
 
-If you deploy it, add the frontend and API URLs here.
+![Next.js](https://img.shields.io/badge/Next.js-15-black)
+![TypeScript](https://img.shields.io/badge/TypeScript-3178C6)
+![Express](https://img.shields.io/badge/Express.js-000000)
+![MySQL](https://img.shields.io/badge/MySQL-4479A1)
+![Docker](https://img.shields.io/badge/Docker-2496ED)
+![GitHub API](https://img.shields.io/badge/GitHub_API-v3-181717)
 
-## Features
+</div>
 
-| Feature | Status | Details |
-| --- | --- | --- |
-| GitHub profile analysis | Done | Analyze a username and generate a full intelligence report. |
-| MySQL persistence | Done | Store profiles, repos, languages, and activity snapshots. |
-| Profile list and detail views | Done | Browse stored analyses, open details, and delete records. |
-| Developer scoring | Done | Generate level-based scorecards from repository and activity data. |
-| API documentation | Done | Swagger/OpenAPI docs are available from the backend. |
-| Real GitHub REST API integration | Done | Uses live GitHub profile, repository, and event data. |
-| Error handling and validation | Done | App-router error boundaries and backend validation are in place. |
-| Deployment support | Ready | Supports separate hosting or Docker Compose deployment. |
+---
 
-## Tech Stack
+## 🌟 Overview
 
-- Frontend: Next.js 15 App Router
-- Backend: Express.js, TypeScript, Zod, Swagger/OpenAPI
-- Database: MySQL 8
-- UI: Tailwind CSS, Recharts, Lucide React, Sonner
-- State: Zustand
-- API source: GitHub REST API
+GitAnalyzer is a full-stack GitHub intelligence platform that transforms a GitHub username into a detailed developer report.
 
-## Architecture
+The platform fetches live GitHub data, calculates developer metrics, analyzes repositories, tracks language usage, evaluates activity patterns, generates developer scores, and persists everything inside MySQL for future retrieval.
 
-- Frontend app lives in `src/`
-- Backend API lives in `backend/`
-- Database schema and seed scripts live in `backend/database/`
-- Root scripts orchestrate frontend and backend development separately
+---
 
-The system is built as a clean full-stack split:
+## ✨ Key Features
 
-- Next.js handles the user interface and API consumption.
-- Express handles profile analysis, persistence, and API responses.
-- MySQL stores normalized profile data and related child records.
+### 🔍 GitHub Profile Analysis
 
-## Project Structure
+- Analyze any public GitHub profile
+- Fetch repositories, followers, following, and activity
+- Calculate developer intelligence metrics
+
+### 📊 Developer Insights
+
+- Developer Score Calculation
+- Developer Level Classification
+- Language Distribution Analysis
+- Repository Performance Metrics
+- Activity Insights
+
+### 🗄️ Persistent Storage
+
+- MySQL-backed storage
+- Historical profile snapshots
+- Profile refresh support
+- Profile deletion support
+
+### 📖 API Documentation
+
+- Swagger/OpenAPI integration
+- Interactive API testing
+- Health monitoring endpoint
+
+### 🐳 Production Ready
+
+- Dockerized backend
+- Separate frontend/backend deployment
+- Environment-based configuration
+- Error handling & validation
+
+---
+
+## 🏗️ System Architecture
 
 ```text
-GitAnalyzer/
-├── src/
-│   ├── app/
-│   │   ├── page.tsx
-│   │   ├── layout.tsx
-│   │   ├── error.tsx
-│   │   ├── global-error.tsx
-│   │   ├── analyzed-profiles/
-│   │   └── api-documentation/
-│   ├── components/
-│   ├── styles/
-│   └── app/stores/
-├── backend/
-│   ├── src/
-│   ├── database/
-│   └── .env
-├── public/
-└── package.json
-```
-
-## Key Screens
-
-- Home page: analyze a GitHub username and generate a report.
-- Stored profiles page: search, sort, and filter saved analyses.
-- Profile detail page: view score, repo stats, language breakdown, and activity insights.
-- API docs page: open backend Swagger UI and health check links.
-
-## Local Setup
-
-### Prerequisites
-
-- Node.js 18+
-- MySQL 8+
-- A GitHub account or public username for testing
-
-### 1. Install Dependencies
-
-```bash
-npm install
-cd backend
-npm install
-```
-
-### 2. Configure Environment
-
-Create `backend/.env` and set:
-
-```env
-PORT=4000
-NODE_ENV=development
-GITHUB_TOKEN=
-MYSQL_HOST=127.0.0.1
-MYSQL_PORT=3306
-MYSQL_USER=root
-MYSQL_PASSWORD=your-password
-MYSQL_DATABASE=gitanalyzer
-CORS_ORIGIN=http://localhost:3000
-```
-
-Create a root `.env.local` for the frontend if needed:
-
-```env
-NEXT_PUBLIC_API_BASE_URL=http://localhost:4000
-```
-
-### 3. Create the Database
-
-Run `backend/database/schema.sql` in MySQL to create the tables.
-
-### 4. Start the Apps
-
-```bash
-npm run dev
-npm run dev:api
-```
-
-- Frontend: `http://localhost:3000`
-- Backend API: `http://localhost:4000`
-- Swagger UI: `http://localhost:4000/docs`
-
-## Deployment
-
-This repository supports two deployment styles.
-
-### Option 1: Split Deployment
-
-- Deploy the Next.js frontend to Vercel, Netlify, or another Node host.
-- Deploy the Express API to Render, Railway, Fly.io, or a VPS.
-- Use a managed MySQL instance or your own MySQL server.
-
-Recommended production split:
-
-- Frontend: Vercel
-- Backend API: Render or Railway
-- Database: Managed MySQL such as PlanetScale, Railway MySQL, or a cloud MySQL instance
-
-Set these production environment variables:
-
-```env
-NEXT_PUBLIC_API_BASE_URL=https://your-api-domain.com
-CORS_ORIGIN=https://your-frontend-domain.com
-MYSQL_HOST=...
-MYSQL_PORT=3306
-MYSQL_USER=...
-MYSQL_PASSWORD=...
-MYSQL_DATABASE=...
-GITHUB_TOKEN=...
-```
-
-Build and start commands:
-
-```bash
-npm run build
-npm run start
-```
-
-Backend:
-
-```bash
-npm run build:api
-npm run start:api
-```
-
-Deployment checklist:
-
-1. Provision a production MySQL database and import `backend/database/schema.sql`.
-2. Deploy the backend first and confirm `/api/v1/health` and `/docs` work.
-3. Set `CORS_ORIGIN` to your frontend domain in the backend environment.
-4. Deploy the frontend and set `NEXT_PUBLIC_API_BASE_URL` to the backend URL.
-5. Open the site and verify profile analysis, list loading, detail pages, and delete actions.
-
-### Option 2: Docker Compose
-
-If Docker is available, run the full stack with:
-
-```bash
-docker compose up --build -d
-```
-
-## Submission Note
-
-If you are submitting this as an assignment, a strong summary is:
-
-> GitAnalyzer is a production-ready full-stack application with a live GitHub REST API integration, persistent MySQL storage, Swagger documentation, error handling, and deployment support. The project is validated with frontend and backend builds and is ready for production hosting.
-
-## API Endpoints
-
-- `POST /api/v1/profiles/analyze` - analyze and persist a GitHub profile
-- `GET /api/v1/profiles` - list stored analyses with pagination, sorting, and filters
-- `GET /api/v1/profiles/:username` - fetch one stored profile
-- `PATCH /api/v1/profiles/:username/refresh` - refresh the analysis from GitHub
-- `DELETE /api/v1/profiles/:username` - delete the stored analysis
-- `GET /api/v1/health` - backend health check
-- `GET /docs` - Swagger UI
-
-## Validation
-
-The following checks were completed during development:
-
-- Frontend build passes with `npm run build`
-- Backend build passes with `npm run build:api`
-- Profile analysis works against the live GitHub REST API
-- Stored profile list and detail pages load from MySQL
-- App-router error boundaries are present
-- Duplicate React key warning on the docs page was fixed
-
-## What It Does Well
-
-- Clean separation between frontend, backend, and database layers
-- Real persistence instead of mock data
-- Clear API contract with Swagger docs
-- Responsive dashboard and profile views
-- Ready for deployment with either split hosting or Docker
-
-## Notes
-
-- A GitHub token is optional, but recommended to reduce rate-limit issues.
-- If the frontend cannot reach the backend, check `NEXT_PUBLIC_API_BASE_URL` and `CORS_ORIGIN`.
-- If MySQL parsing issues appear, verify the schema is loaded and the backend env file is correct.
+┌────────────────────┐
+│     Next.js UI     │
+└─────────┬──────────┘
+          │
+          ▼
+┌────────────────────┐
+│   Express API      │
+└─────────┬──────────┘
+          │
+          ▼
+┌────────────────────┐
+│      MySQL DB      │
+└─────────┬──────────┘
+          │
+          ▼
+┌────────────────────┐
+│  GitHub REST API   │
+└────────────────────┘
